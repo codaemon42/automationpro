@@ -20,13 +20,13 @@ sudo yum update -y
 
 
 # --- Step 1: Ask for application name ---
-read -p "Enter the application name: " APP_NAME
+read -p "Enter the application name: " APP_NAME </dev/tty
 
 # --- Step 2: Ask for Git repo URL ---
-read -p "Enter the Git repository URL: " APP_REPO
+read -p "Enter the Git repository URL: " APP_REPO </dev/tty
 
 # --- Step 3: Determine if repo is private ---
-read -p "Is this a private repository? (y/N): " IS_PRIVATE
+read -p "Is this a private repository? (y/N): " IS_PRIVATE </dev/tty
 IS_PRIVATE=${IS_PRIVATE:-N}
 
 # --- Step 4: Set directory name dynamically ---
@@ -34,7 +34,7 @@ REPO_NAME=$(basename "$APP_REPO" .git)
 APP_DIR="$HOME/$REPO_NAME"
 
 # --- Step 5: Ask for application port ---
-read -p "Enter the application port number [default 3000]: " APP_PORT
+read -p "Enter the application port number [default 3000]: " APP_PORT </dev/tty
 APP_PORT=${APP_PORT:-3000}
 
 echo
@@ -56,7 +56,7 @@ if [[ "$IS_PRIVATE" =~ ^[Yy]$ ]]; then
         ssh-keygen -t ed25519 -f "$SSH_KEY" -N ""
         echo "Add the following public key as a deploy key in GitHub:"
         cat "${SSH_KEY}.pub"
-        read -p "Press ENTER once you've added the key to GitHub..."
+        read -p "Press ENTER once you've added the key to GitHub..." </dev/tty
     fi
 
     # Start ssh-agent and add the key
