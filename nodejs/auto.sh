@@ -73,7 +73,8 @@ sudo systemctl start nginx
 sudo systemctl enable nginx
 
 echo "📦 Installing NVM..."
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh)"
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 # NEW CHANGE
 echo "📦 Installing Node.js (LTS)..."
