@@ -78,7 +78,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/insta
 
 # NEW CHANGE
 echo "📦 Installing Node.js (LTS)..."
+set +u
 source ~/.bashrc
+set -u
 nvm -v
 nvm install $NODE_VERSION
 node -v
