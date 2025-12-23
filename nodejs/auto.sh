@@ -37,6 +37,9 @@ APP_DIR="$HOME/$REPO_NAME"
 read -p "Enter the application port number [default 3000]: " APP_PORT </dev/tty
 APP_PORT=${APP_PORT:-3000}
 
+read -p "Enter the application port number [default lts]: " NODE_VERSION </dev/tty
+NODE_VERSION=${NODE_VERSION:-lts/*}
+
 echo
 echo "✅ Configuration summary:"
 echo "App Name      : $APP_NAME"
