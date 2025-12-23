@@ -104,6 +104,7 @@ npm install
 # Application
 echo "🚀 Starting application with PM2..."
 npm install -g pm2
+export PATH="$PATH:$(npm bin -g)"
 pm2 start npm --name $APP_NAME -- start
 pm2 save
 
