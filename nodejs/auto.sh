@@ -37,7 +37,7 @@ APP_DIR="$HOME/$REPO_NAME"
 read -p "Enter the application port number [default 3000]: " APP_PORT </dev/tty
 APP_PORT=${APP_PORT:-3000}
 
-read -p "Enter the application port number [default lts]: " NODE_VERSION </dev/tty
+read -p "Enter the Node.js version [default lts]: " NODE_VERSION </dev/tty
 NODE_VERSION=${NODE_VERSION:-lts/*}
 
 echo
@@ -46,6 +46,7 @@ echo "App Name      : $APP_NAME"
 echo "Git Repo      : $APP_REPO"
 echo "Private Repo? : $IS_PRIVATE"
 echo "App Directory : $APP_DIR"
+echo "App Port      : $APP_PORT"
 echo "App Port      : $APP_PORT"
 echo
 
@@ -86,6 +87,7 @@ set +u
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 set -u
 nvm -v
+echo "NODE_VERSION : $NODE_VERSION"
 nvm install $NODE_VERSION
 node -v
 
@@ -96,7 +98,7 @@ git clone "$APP_REPO" "$APP_DIR"
 
 # Dependencies
 echo "📦 Installing application dependencies..."
-cd $APP_DIR_NAME
+cd $REPO_NAME
 npm install
 
 # Application
