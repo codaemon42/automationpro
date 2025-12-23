@@ -78,8 +78,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/insta
 
 # NEW CHANGE
 echo "📦 Installing Node.js (LTS)..."
+export NVM_DIR="$HOME/.nvm"
 set +u
-source ~/.bashrc
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 set -u
 nvm -v
 nvm install $NODE_VERSION
