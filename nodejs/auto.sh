@@ -33,6 +33,10 @@ IS_PRIVATE=${IS_PRIVATE:-N}
 REPO_NAME=$(basename "$APP_REPO" .git)
 APP_DIR="$HOME/$REPO_NAME"
 
+read -p "Enter the start filename(ex. src/app.js) [default index.js]: " APP_START_FILENAME </dev/tty
+APP_START_FILENAME=${APP_START_FILENAME:-index.js}
+APP_START_FILE="$APP_DIR/$APP_START_FILENAME"
+
 # --- Step 5: Ask for application port ---
 read -p "Enter the application port number [default 3000]: " APP_PORT </dev/tty
 APP_PORT=${APP_PORT:-3000}
@@ -46,6 +50,7 @@ echo "App Name      : $APP_NAME"
 echo "Git Repo      : $APP_REPO"
 echo "Private Repo? : $IS_PRIVATE"
 echo "App Directory : $APP_DIR"
+echo "App Start File: $APP_START_FILE"
 echo "App Port      : $APP_PORT"
 echo "App Port      : $APP_PORT"
 echo
@@ -104,7 +109,7 @@ npm install
 # Application
 echo "🚀 Starting application with PM2..."
 npm install -g pm2
-export PATH="$PATH:$(npm bin -g)"
+export PATH="$PATH:$(dirname "$(nvm which current)")"
 pm2 start npm --name $APP_NAME -- start
 pm2 save
 
@@ -126,7 +131,6 @@ sudo systemctl reload nginx
 
 
 echo "⚙️ Enabling PM2 startup on reboot..."
-pm2 startup systemd -u ec2-user --hp /home/ec2-user
 sudo env PATH=$PATH:$(dirname "$(nvm which current)") pm2 startup systemd -u ec2-user --hp /home/ec2-user
 
 
