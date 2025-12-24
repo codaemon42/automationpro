@@ -109,19 +109,14 @@ pm2 start npm --name $APP_NAME -- start
 pm2 save
 
 echo "🌐 Configuring Nginx reverse proxy..."
-sudo tee /etc/nginx/conf.d/node-app.conf > /dev/null <<EOF
-server {
-    listen 80;
-    server_name _;
-
-    location / {
-        proxy_pass http://localhost:$APP_PORT;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade \$http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host \$host;
-        proxy_cache_bypass \$http_upgrade;
-    }
+sudo tee /etc/nginx/default.d/node-app.conf > /dev/null <<EOF
+location / {
+    proxy_pass http://localhost:$APP_PORT;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host \$host;
+    proxy_cache_bypass \$http_upgrade;
 }
 EOF
 
